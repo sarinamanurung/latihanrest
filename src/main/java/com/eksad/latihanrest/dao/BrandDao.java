@@ -11,6 +11,8 @@ import com.eksad.latihanrest.model.Brand;
 public interface BrandDao extends CrudRepository<Brand, Long>
  {
 	
+	
+	
 	public Brand findOneByName(String name);
 	public List<Brand>findByName(String name);
 	public List<Brand>findByProductType(String type);

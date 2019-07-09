@@ -15,7 +15,7 @@ import lombok.ToString;
 
 public class Customer extends Person {
 	
-	@Column(name = "card_number")
+	@Column(name = "card_num")
 	private String cardNum;
 
 }

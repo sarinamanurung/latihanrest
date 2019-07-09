@@ -23,81 +23,60 @@ public class BrandControler {
 	BrandDao brandDao;
 	
 	@RequestMapping("getAll")
-	public List<Brand> getAll() {
-		List<Brand> result = new ArrayList<>();
+	public List <Brand> getAll() {
+		
+		List<Brand>result = new ArrayList<>();
+		
 		brandDao.findAll().forEach(result::add);
 		
 		return result;
 	}
 	
 	@RequestMapping("getOne/{id}")
-	public Brand getoNe(@PathVariable Long id) {
-		return brandDao.findById(id).orElse(null);
+	public Brand getOne(@PathVariable Long id) {
 		
+		return brandDao.findById(id).orElse(null);
+				
 	}
 	
-//	untuk membaca data apa yang akan di kirim
-	
-//	-------------------------------------------------------------------------------------------------------------
-	
-//	@RequestMapping(value = "save", method = RequestMethod.POST)
-//	public String save(@RequestBody Brand brand) {
-//		try {
-//			brandDao.save(brand);
-//			return "Barhasil Tersimpan";
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return "Gagal Tersimpan";
-//	-------------------------------------------------------------------------------------------------------------
-	
-	@RequestMapping(value = "save", method = RequestMethod.POST)
-	public Brand save(@RequestBody Brand brand) {
+	@RequestMapping(value = "save", method =RequestMethod.POST)
+	public Brand save(@RequestBody Brand brand) { //untuk membaca data dalam postman dalam bentuk brand
 		try {
-			return brandDao.save(brand);
 			
+			return brandDao.save(brand);
 		} catch (Exception e) {
+		
 			e.printStackTrace();
 			return null;
-	
 		}
-		
 	}
-//	@RequestMapping(value = "update/{id}", method = RequestMethod.PUT)
-//	public String update(@RequestBody Brand brand, @PathVariable Long id) {
-//		Brand brandSelected= brandDao.findById(id).orElse(null);
-//		if (brandSelected != null) {
-//			brandSelected.setName(brand.getName());
-//			brandSelected.setProductType(brand.getProductType());
-//			
-//
-//			brandDao.save(brandSelected);
-//			return "Berhasil Diperbaharui";
 	
-	
-	@RequestMapping(value = "update/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value ="update/{id}",method = RequestMethod.PUT)
 	public Brand update(@RequestBody Brand brand, @PathVariable Long id) {
-		Brand brandSelected= brandDao.findById(id).orElse(null);
-		if (brandSelected != null) {
+		
+		Brand brandSelected = brandDao.findById(id).orElse(null);
+		if (brandSelected!= null) {
 			brandSelected.setName(brand.getName());
 			brandSelected.setProductType(brand.getProductType());
 			
-
+			brandDao.save(brandSelected);
 			return brandDao.save(brandSelected);
-			
-		}else {
-			return null;
-			
-			
 		}
+		else {
+			return null;
+		}
+		
+				
 	}
 	
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value ="delete/{id}",method = RequestMethod.DELETE)
 	public HashMap<String, Object> delete(@PathVariable Long id) {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		brandDao.deleteById(id);
-		result.put("mesege", "berhasil dihapus");
+		result.put("message", "Berhasil Dihapus");
 		return result;
-		
-		
 	}
+	
 }
+
+
