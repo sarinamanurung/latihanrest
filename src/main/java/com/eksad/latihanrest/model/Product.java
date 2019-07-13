@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
@@ -48,13 +49,30 @@ public class Product {
 	private Brand brand;
 	
 //	Transient agar variabel tidak dibaca di dalam database
+	
+	@ApiModelProperty(
+			value = "Brand Id Di Product",
+			dataType = "String",
+			required = true
+			)
 	@Transient
 	private Long brandId;
 	
 	
+	@ApiModelProperty(
+			value = "Nama Product",
+			dataType = "String",
+			required = true
+			)
 	@Column(nullable = false)
 	private String name;
 	
+	
+	@ApiModelProperty(
+			value = "Harga Product",
+			dataType = "BigDecimal",
+			required = true
+			)
 	@Column(nullable = false)
 	private BigDecimal price;
 	

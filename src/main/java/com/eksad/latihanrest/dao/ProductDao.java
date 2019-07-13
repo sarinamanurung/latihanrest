@@ -14,7 +14,7 @@ public interface ProductDao extends CrudRepository<Product, Long> {
 	
 	public Iterable<Product> findByBrandId(@Param("brandId")Long brandId);
 
-	@Query("select p from Product p where p.product.id = :productId")
+	@Query("select p from Product p where p.id = :productId")
 	public Iterable<Product> findByProductId(@Param("productId") Long productId);
 	
 	public List<Product> findByName(String name);
